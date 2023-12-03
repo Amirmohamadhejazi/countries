@@ -89,7 +89,7 @@ const DetailCountry = ({ paramsID }: any) => {
                                     <span>SubRegion: {dataDetail.subregion}</span>
                                     <span className='col-span-2'>
                                         Capital:
-                                        {dataDetail?.capital ? dataDetail?.capital?.map((items) => items) : '---'}
+                                        {dataDetail?.capital ? dataDetail?.capital?.map((items: any) => items) : '---'}
                                     </span>
                                 </div>
                             </div>

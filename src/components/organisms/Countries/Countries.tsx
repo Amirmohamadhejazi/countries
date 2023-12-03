@@ -26,10 +26,33 @@ const Countries = () => {
     const [input, setInput] = useState(query.search || '')
 
     const { data, error, isSuccess, isError, isLoading } = useQuery({
-        queryKey: ['AllCountries'],
-        queryFn: AllCountriesApiFn,
+        queryKey: ['AllCountries', query],
+        queryFn: () => {
+            if (query.select) {
+                return AllCountriesApiFn({ route: '/region/', data: query.select })
+            }
+            if (query.search && query.search !== '') {
+                return AllCountriesApiFn({ route: '/name/', data: query.search })
+            } else {
+                return AllCountriesApiFn({ route: '/all', data: '' })
+            }
+        },
         staleTime: 360,
     })
+    const selectHandler = (data: any) => {
+        setQuery({ search: null, select: data })
+    }
+    const inputHandler = (data: any) => {
+        setQuery({ search: data, select: null })
+    }
+    // useEffect(() => {
+    //     if (query.select) {
+    //         console.log('select')
+    //     }
+    //     if (query.search && query.search !== '') {
+    //         console.log('search')
+    //     }
+    // })
     // setQuery({ x: Math.random(), q: Math.random() })
 
     // search input
@@ -40,14 +63,56 @@ const Countries = () => {
 
     if (isLoading) {
         return (
-            <div className='flex items-center w-full justify-center'>
+            <div className='container px-2  mx-auto flex flex-col gap-8'>
+                <div className='container mx-auto flex justify-between items-center'>
+                    <Input
+                        placeholder='Clearable input'
+                        value={input}
+                        onChange={(event) => setInput(event.currentTarget.value)}
+                        rightSectionPointerEvents='all'
+                        rightSection={<FiSearch className='cursor-pointer ' onClick={() => inputHandler(input)} />}
+                    />
+                    <Select
+                        data={['Africa', 'America', 'Asia', 'Europe', 'Oceania']}
+                        defaultValue={query.select ? query.select : null}
+                        onChange={(e: any) => selectHandler(e)}
+                        clearable
+                        searchable
+                    />
+                </div>
+
                 <Loading />
             </div>
         )
     }
     if (isError) {
         return (
-            <div className='flex items-center w-full justify-center'>
+            <div className='container px-2  mx-auto flex flex-col gap-8'>
+                <div className='container mx-auto flex justify-between items-center'>
+                    <Input
+                        placeholder='Clearable input'
+                        value={input}
+                        onChange={(event) => setInput(event.currentTarget.value)}
+                        rightSectionPointerEvents='all'
+                        rightSection={
+                            // <CloseButton
+                            //     aria-label='Clear input'
+                            //     onClick={() => setInput('')}
+                            //     style={{ display: input ? undefined : 'none' }}
+                            // />
+                            <FiSearch className='cursor-pointer ' onClick={() => inputHandler(input)} />
+                        }
+                    />
+                    <Select
+                        data={['Africa', 'America', 'Asia', 'Europe', 'Oceania']}
+                        defaultValue={query.select ? query.select : null}
+                        onChange={(e: any) => selectHandler(e)}
+                        // onChange={(e: any) => setSelect(e)}
+                        clearable
+                        searchable
+                    />
+                </div>
+
                 <Error text={error.message} />
             </div>
         )
@@ -55,12 +120,7 @@ const Countries = () => {
 
     if (isSuccess) {
         // console.log(select)
-        const selectHandler = (data: any) => {
-            setQuery({ search: null, select: data })
-        }
-        const inputHandler = (data: any) => {
-            setQuery({ search: data, select: null })
-        }
+
         return (
             <div className='container px-2  mx-auto flex flex-col gap-8'>
                 <div className='container mx-auto flex justify-between items-center'>

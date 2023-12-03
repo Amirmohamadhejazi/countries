@@ -2,9 +2,9 @@
 
 import { Http } from '@core/services/interceptors'
 
-const AllCountriesApiFn = async () => {
+const AllCountriesApiFn = async ({ route, data }: { route: string; data: any }) => {
     try {
-        return Http.get(`/all`).then((res) => res.data)
+        return Http.get(`${route}${data}`).then((res) => res.data)
     } catch (error: any) {
         return error.response?.data
     }

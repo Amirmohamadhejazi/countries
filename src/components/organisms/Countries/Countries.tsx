@@ -123,7 +123,7 @@ const Countries = () => {
 
         return (
             <div className='container px-2  mx-auto flex flex-col gap-8'>
-                <div className='container mx-auto flex justify-between items-center'>
+                <div className='container mx-auto flex  gap-2 justify-between items-center'>
                     <Input
                         placeholder='Clearable input'
                         value={input}
@@ -148,7 +148,7 @@ const Countries = () => {
                     />
                 </div>
                 <div className=''>
-                    <div className='grid gap-5 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4'>
+                    <div className='grid gap-5 grid-cols-1 xs:grid-cols-2  md:grid-cols-3 lg:grid-cols-4'>
                         {data.map((itemsCountries: any, index: any) => (
                             <Link href={`/${itemsCountries.ccn3}`} key={index}>
                                 <div className='flex flex-col rounded-lg overflow-hidden bg-[#ffffff] shadow-sm dark:bg-[#2b3945] whitespace-nowrap'>

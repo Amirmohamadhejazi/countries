@@ -68,15 +68,15 @@ const DetailCountry = ({ paramsID }: any) => {
                     </Link>
 
                     <div className='w-full flex justify-center mt-8'>
-                        <div className='w-full gap-8 grid grid-cols-5'>
-                            <div className=' h-72 col-span-2'>
+                        <div className='w-full gap-8 grid grid-cols-1 lg:grid-cols-5'>
+                            <div className=' h-72  md:col-span-2'>
                                 <img
                                     src={dataDetail.flags.png}
                                     className='w-full h-full object-cover  rounded-md'
                                     alt=''
                                 />
                             </div>
-                            <div className='flex flex-col justify-center p-1 gap-3   col-span-3 '>
+                            <div className='flex flex-col justify-center p-1 gap-3    lg:col-span-3 '>
                                 <span className='text-2xl font-bold truncate'>{dataDetail.name.common}</span>
 
                                 <div className='grid grid-cols-2 gap-2'>

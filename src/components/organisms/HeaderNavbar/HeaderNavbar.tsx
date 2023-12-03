@@ -25,7 +25,9 @@ const HeaderNavbar = () => {
                     <span className='text-xl font-bold'>where in the world?</span>
                     <div className='flex gap-1 items-center font-medium cursor-pointer' onClick={() => toggleMode()}>
                         {darkMode ? <IoMoonOutline className='text-lg' /> : <MdOutlineWbSunny className='text-xl' />}
-                        {darkMode ? <span>dark Mode</span> : <span>light Mode</span>}
+                        <div className='hidden xs:block'>
+                            {darkMode ? <span>dark Mode</span> : <span>light Mode</span>}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { FiSearch } from 'react-icons/fi'
 import { Input, Select } from '@mantine/core'
 import { StringParam, useQueryParams } from 'use-query-params'
@@ -18,11 +18,6 @@ const Countries = () => {
         search: StringParam,
         select: StringParam,
     })
-
-    useEffect(() => {
-        // if()
-        console.log(query)
-    }, [query])
     const [input, setInput] = useState(query.search || '')
 
     const { data, error, isSuccess, isError, isLoading } = useQuery({
@@ -78,14 +73,7 @@ const Countries = () => {
                         value={input}
                         onChange={(event) => setInput(event.currentTarget.value)}
                         rightSectionPointerEvents='all'
-                        rightSection={
-                            // <CloseButton
-                            //     aria-label='Clear input'
-                            //     onClick={() => setInput('')}
-                            //     style={{ display: input ? undefined : 'none' }}
-                            // />
-                            <FiSearch className='cursor-pointer ' onClick={() => inputHandler(input)} />
-                        }
+                        rightSection={<FiSearch className='cursor-pointer ' onClick={() => inputHandler(input)} />}
                     />
                     <Select
                         data={['Africa', 'America', 'Asia', 'Europe', 'Oceania']}
